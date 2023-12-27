@@ -49,3 +49,5 @@ ansible/.dependencies
 **/.pkrtpl.hcl
 
 *authorized_keys
+
+.DS_Store
