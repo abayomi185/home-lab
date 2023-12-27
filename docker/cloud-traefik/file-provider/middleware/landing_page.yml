@@ -1,0 +1,22 @@
+http:
+  middlewares:
+    landing_page_redirect:
+      headers:
+        # hostsProxyHeaders: "X-Forwarded-Host"
+        customRequestHeaders:
+          # X-Forwarded-For: ""
+          # X-Proxy-Hostname: ""
+          # X-Forwarded-Host: "example.vercel.app"
+          Host: "example.vercel.app"
+          # X-Vercel-Forwarded-For: "example.vercel.app"
+          # X-Custom-Request-Header: ""
+        # customResponseHeaders:
+          # X-Vercel-Forwarded-For: "example.vercel.app"
+          # Host: "example.vercel.app"
+        # sslProxyHeaders:
+        #   X-Forwarded-Proto: https
+      # redirectRegex:
+        # regex: "^https://example.vercel.app/(.*)"
+        # replacement: "https://example.com/${1}"
+        # regex: "^https://example.com/(.*)"
+        # replacement: "https://example.vercel.app/${1}"

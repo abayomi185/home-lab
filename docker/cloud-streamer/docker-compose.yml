@@ -1,0 +1,18 @@
+---
+version: "2.1"
+services:
+  streamer:
+    image: alqutami/rtmp-hls
+    container_name: streamer
+    hostname: streamer
+    environment:
+      - PUID=1000
+      - PGID=100
+      #- TZ=Europe/London
+      #- UMASK=007
+    #volumes:
+      #- /home/yom/Extra-configs/streamer/custom.conf:/etc/nginx/nginx.conf
+    ports:
+      - 8008:8080
+      - 1935:1935
+    restart: unless-stopped

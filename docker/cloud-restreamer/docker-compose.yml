@@ -1,0 +1,45 @@
+---
+version: "2.1"
+services:
+  restreamer1:
+    image: datarhei/restreamer:latest
+    container_name: restreamer1
+    environment:
+      - RS_USERNAME=restreamer
+      - RS_PASSWORD=
+      - RS_TIMEZONE=Europe/London
+      - RS_TOKEN=
+    volumes:
+      - /home/cloud/restreamer/db1:/restreamer/db
+    ports:
+      - 8091:8080
+      - 1935:1935
+    restart: unless-stopped
+
+  restreamer2:
+    image: datarhei/restreamer:latest
+    container_name: restreamer2
+    environment:
+      - RS_USERNAME=restreamer
+      - RS_PASSWORD=
+      - RS_TIMEZONE=Europe/London
+      - RS_TOKEN=
+    volumes:
+      - /home/cloud/restreamer/db2:/restreamer/db
+    ports:
+      - 8092:8080
+    restart: unless-stopped
+
+  restreamer3:
+    image: datarhei/restreamer:latest
+    container_name: restreamer3
+    environment:
+      - RS_USERNAME=restreamer
+      - RS_PASSWORD=
+      - RS_TIMEZONE=Europe/London
+      - RS_TOKEN=
+    volumes:
+      - /home/cloud/restreamer/db3:/restreamer/db
+    ports:
+      - 8093:8080
+    restart: unless-stopped

@@ -1,0 +1,17 @@
+
+version: '3.7'
+services:
+
+  tinc:
+    image: jenserat/tinc:latest
+    container_name: tinc
+    devices:
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /home/cloud/tinc/data:/etc/tinc
+      - /home/cloud/tinc/logs:/var/log/tinc
+    network_mode: "host"
+    entrypoint: /usr/sbin/tinc
+    command: start -D

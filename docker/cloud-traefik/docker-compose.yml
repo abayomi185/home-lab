@@ -1,0 +1,38 @@
+version: "3.3"
+
+services:
+  traefik:
+    image: "traefik:v2.9"
+    container_name: "traefik"
+    restart: "unless-stopped"
+    network_mode: "host"
+    #command:
+      #- "--log.level=DEBUG"
+      #- "--api.insecure=true"
+      #- "--providers.docker=true"
+      #- "--providers.docker.exposedbydefault=false"
+      #- "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "443:443"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./file-provider:/etc/traefik/file-provider:ro
+      - ./logs:/logs
+      - ./acme:/etc/traefik/acme
+    environment:
+      - "HETZNER_API_KEY="
+      - "MEDIA_DOMAIN_NAME=example.com"
+      - "BLOG_DOMAIN_NAME=yomis.blog"
+
+  whoami:
+    image: "traefik/whoami"
+    container_name: "simple-service"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.example.com`)"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"

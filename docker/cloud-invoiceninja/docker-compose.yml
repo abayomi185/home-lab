@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  server:
+    image: nginx
+    restart: always
+    env_file: invoiceninja.env
+    volumes:
+      # Vhost configuration
+      #- ./config/caddy/Caddyfile:/etc/caddy/Caddyfiledocker-com
+      - ./config/nginx/in-vhost.conf:/etc/nginx/conf.d/in-vhost.conf:ro
+      - ./docker/app/public:/var/www/app/public:ro
+    depends_on:
+      - app
+    ports:
+            - "127.0.0.1:8181:80"
+    networks:
+      - invoiceninja
+
+  app:
+    image: invoiceninja/invoiceninja:5
+    env_file: invoiceninja.env
+    restart: always
+    volumes:
+      - ./config/hosts:/etc/hosts:ro
+      - ./docker/app/public:/var/www/app/public:rw,delegated
+      - ./docker/app/storage:/var/www/app/storage:rw,delegated
+    depends_on:
+      - db
+    networks:
+      - invoiceninja
+
+  db:
+    image: mysql:8
+    expose:
+      - "3306"
+    restart: always
+    env_file: invoiceninja.env
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql:rw,delegated
+    networks:
+      - invoiceninja
+
+networks:
+  invoiceninja:

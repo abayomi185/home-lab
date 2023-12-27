@@ -1,0 +1,18 @@
+---
+version: "2.1"
+services:
+  wireguard-ui:
+    image: embarkstudios/wireguard-ui:latest
+    container_name: wireguard-ui
+    entrypoint: /wireguard-ui
+    privileged: true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /tmp/wireguard-ui:/data
+    ports:
+      - 8080:8080
+      - 5555:5555
+    restart: unless-stopped

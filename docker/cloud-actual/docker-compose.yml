@@ -1,0 +1,11 @@
+version: "3"
+services:
+  actual_server:
+    image: jlongster/actual-server:latest
+    container_name: actual_budget
+    ports:
+      - "127.0.0.1:5006:5006"
+    volumes:
+      - ./server-files:/app/server-files
+      - ./user-files:/app/user-files
+    restart: unless-stopped

@@ -1,0 +1,27 @@
+http:
+  routers:
+    rancher:
+      entryPoints:
+        - web
+      rule: Host(`rancher.{{env "MEDIA_DOMAIN_NAME"}}`)
+      middlewares:
+        - https_redirect
+      service: rancher
+    rancher-secure:
+      entryPoints:
+        - websecure
+      rule: Host(`rancher.{{env "MEDIA_DOMAIN_NAME"}}`)
+      middlewares:
+        - authelia
+        # - rancherHeader
+      tls:
+        certResolver: letsencrypt
+        # passthrough: true
+      service: rancher
+
+  services:
+    rancher:
+      loadBalancer:
+        servers:
+          # Rancher backend
+          - url: https://rancher.local.example.com
