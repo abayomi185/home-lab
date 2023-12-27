@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  influxdb:
+    container_name: influxdb
+    image: influxdb
+    ports:
+      - 8086:8086
+    user: "1001"
+    volumes:
+      - /config/influxdb/config:/var/lib/influxdb2
+    restart:
+      always

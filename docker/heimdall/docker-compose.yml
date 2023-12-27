@@ -1,0 +1,18 @@
+---
+version: "2.1"
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall
+    container_name: heimdall
+    environment:
+        # due to mapping in lxc contatiner
+        # user is 1001 and group is 100
+      - PUID=1001
+      - PGID=100
+      - TZ=Europe/London
+    volumes:
+      - /config/heimdall/config:/config
+    ports:
+      - 8080:80
+      - 4443:443
+    restart: unless-stopped

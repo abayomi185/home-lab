@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  adguard_exporter:
+    container_name: adguard_exporter
+    image: ebrianne/adguard-exporter:latest
+    restart: always
+    ports:
+      - "9617:9617"
+    env_file:
+      - .env
