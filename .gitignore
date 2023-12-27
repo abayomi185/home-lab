@@ -47,3 +47,5 @@ ansible/.dependencies
 
 # Ignore Packer File
 **/.pkrtpl.hcl
+
+*authorized_keys
