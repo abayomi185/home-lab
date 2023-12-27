@@ -32,3 +32,18 @@ override.tf.json
 
 *plan*
 *.lock.hcl
+
+# Exclude virtualenv for python
+**/.venv
+
+# Prevent sensitive auto-generated Packer variable files from being tracked
+**/secrets.auto.pkrvars.hcl
+
+# Disregard Ansible dependency directories to reduce clutter
+ansible/.dependencies
+
+# Exclude Ansible fact cache to prevent outdated data from being versioned
+.fact_cache/
+
+# Ignore Packer File
+**/.pkrtpl.hcl

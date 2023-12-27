@@ -1,2 +1,3 @@
-# home-lab
-cloud and container technologies in my home lab
+# Home Operations - Infrastructure as Code (IaC)
+
+Cloud and container technologies in my home lab
